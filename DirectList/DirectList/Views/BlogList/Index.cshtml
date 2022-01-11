@@ -1,0 +1,78 @@
+﻿@model VmBlog
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="main-wrapper">
+    <partial name="_BannerPartial" model="Model.Banner" />
+
+    <!-- Content -->
+    <div class="content">
+        <div class="container">
+            <!-- Blog Posts -->
+            <div class="blog-page">
+                <div class="row">
+                    <div class="col-lg-9 col-md-8 padding-right-30">
+                        <!-- Blog Post -->
+                        @foreach (var item in Model.Blogs)
+                        {
+                            <div class="card card-lift--hover shadow border-0 mb-4">
+                                <img class="img-fluid" src="~/Uploads/@item.Image" alt="image">
+                                <div class="card-body py-4">
+                                    <a asp-controller="BlogList" asp-action="Detail" asp-route-id="@item.Id"><h5 class="text-primary">@item.Title</h5></a>
+                                    <p class="text-primary">@item.CreatedDate.ToString("dd MMMM yyyy")</p>
+                                    <p class="description mt-3">@(item.Content.Length > 300 ? item.Content.Substring(0, 300) + " ..." : item.Content)</p>
+                                    <a class="btn btn-primary" asp-controller="BlogList" asp-action="BlogDetail" asp-route-id="@item.Id">Read More</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- Blog Posts / End -->
+                    <!-- Widgets -->
+                    <div class="col-lg-3 col-md-4">
+                        <div class="sidebar right">
+                            <!-- Widget -->
+                            <div class="widget">
+                                <form class="search-form" method="get" asp-controller="BlogList" asp-action="Index">
+                                    <div class="form-group">
+                                        <div class="input-group mb-4">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                            </div>
+                                            <input class="form-control" placeholder="Search" type="text" name="SearchData">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="widget margin-top-40">
+                                <h3>Popular Posts</h3>
+                                <ul class="widget-tabs">
+                                    @foreach (var item in Model.Blogs)
+                                    {
+                                        <li>
+                                            <div class="widget-content">
+                                                <div class="widget-thumb">
+                                                    <a asp-controller="BlogList" asp-action="BlogDetail" asp-route-id="@item.Id"><img src="~/Uploads/@item.Image" alt="image"></a>
+                                                </div>
+                                                <div class="widget-text">
+                                                    <h5><a asp-controller="BlogList" asp-action="BlogDetail" asp-route-id="@item.Id">@item.Title</a></h5>
+                                                    <span>@item.CreatedDate.ToString("MMMM dd, yyyy")</span>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                           
+                            <!-- Widget / End-->
+                            <div class="clearfix"></div>
+                            <div class="margin-bottom-40"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sidebar / End -->
+            </div>
+        </div>
+    </div>
+</div>

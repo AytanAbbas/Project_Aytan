@@ -1,0 +1,107 @@
+﻿@model VmRestaurant
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="titlebar" class="gradient">
+    <div class="title-bar-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@Model.Banner.Title</h2>
+                    <span>Explore your search places</span>
+                    Breadcrumbs
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a>Home</a></li>
+                            <li>@Model.Banner.Page</li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title-overlay"></div>
+</div>
+
+<!-- Content -->
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <!-- Search -->
+            <div class="col-md-6 grid-full-width page-search mb-3">
+                <div class="main-search-input mt-0">
+                    <form asp-controller="Listing" asp-action="Index" method="get" style="display: flex; justify-content: space-around;">
+
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <input asp-for="@Model.Search.searchdata" placeholder="Restaurant Name" class="form-control" style="color:black;">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-12 text-right">
+                            <button type="submit" class="btn main-search-btn btn-radius btn-lg btn-primary text-white"><span class="btn-inner--text">Search</span></button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <!-- Search Section / End -->
+            <div class="col-md-12">
+
+                <!-- Sorting - Filtering Section / End -->
+                <div class="row">
+                    <!-- Listing Item -->
+                    @foreach (var restaurant in Model.Restaurants)
+                    {
+                        <div class="col-lg-12 col-md-12 mb-5">
+                            <div class="listing-item-container list-layout">
+                                <div class="listing-item">
+                                    <!-- Image -->
+                                    <div class="listing-item-image">
+                                        <a asp-controller="Listing" asp-action="Detail" asp-route-id="@restaurant.Id"><img src="~/Uploads/@restaurant.RestaurantImages.FirstOrDefault().Image" alt=""></a>
+                                    </div>
+                                    <!-- Content -->
+                                    <div class="listing-item-content">
+                                        <span text-uppercase">
+                                            @if ((restaurant.StartDate.Hour < DateTime.Now.Hour && restaurant.StartDate.Minute <= DateTime.Now.Minute) && (restaurant.EndDate.Hour > DateTime.Now.Hour && restaurant.EndDate.Minute <= DateTime.Now.Minute))
+                                            {
+                                                <span class="badge badge-pill list-banner badge-success">Open</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-pill list-banner badge-danger">Closed</span>
+                                            }
+                                        </span>
+                                        <div class="listing-item-inner">
+                                            <!-- <DirectlistRating [rate]="list.rating"></DirectlistRating> -->
+                                            <a asp-controller="Listing" asp-action="Detail" asp-route-id="@restaurant.Id">
+                                                <h3>@restaurant.Name</h3>
+                                            </a>
+                                            <div class="address-bar"> <small>@restaurant.Address</small> </div>
+                                            @foreach (var tag in restaurant.TagToRestaurants)
+                                            {
+                                                <div class="mt-3"><a asp-controller="Listing" asp-action="Index" asp-route-tagid="@tag.TagId" style="cursor:pointer;"><span class="badge badge-pill badge-primary text-uppercase badge-cat">@tag.Tag.Name</span></a></div>
+                                            }
+                                        </div>
+                                        @*<a asp-controller="Listing" asp-action="AddToCart" asp-route-id="@restaurant.Id">
+                                            <span class="round-pill like-banner d-block bg-primary @(Model.AddToCart!=null?Model.AddToCart.Any(a => a==restaurant.Id.ToString())?"myadded":"":"") "><i class="fa fa-heart-o"></i></span>
+
+                                        </a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                    <!-- Listing Item / End -->
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,298 @@
+﻿@model VmHome
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="position-relative">
+    <section class="section section-lg section-hero section-shaped">
+        <div class="shape shape-style-1 shape-primary">
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+            <span class="span-50"></span>
+            <span class="span-75"></span>
+            <span class="span-100"></span>
+            <span class="span-75"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <div class="overlay-bg"></div>
+        </div>
+        <div class="container shape-container d-flex align-items-center py-lg">
+            <div class="main-search-inner">
+                <h2 class="text-white display-2">Find Nearby Attractions</h2>
+                <h4 class="text-white">Expolore top-rated attractions, activities and more</h4>
+                <!-- Search -->
+                <div class="col-md-6 grid-full-width page-search mb-3" style=" max-width: 100%;">
+                    <div class="main-search-input mt-0">
+                        <form asp-controller="Listing" asp-action="Index" method="get" style="display: flex; justify-content: space-around;">
+
+                            <div class="col-lg-5 col-sm-6">
+                                <div class="form-group">
+                                    <input asp-for="@Model.Search.searchdata" placeholder="Restaurant Name" class="form-control" style="color:black;">
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-sm-6 text-right">
+                                <button type="submit" class="btn main-search-btn btn-radius btn-lg btn-primary text-white"><span class="btn-inner--text">Search</span></button>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+                <!-- Search Section / End -->
+            </div>
+        </div>
+        <!-- SVG separator -->
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </section>
+</div>
+<div class="block-space">
+    <div class="container">
+        <div class="block-head text-center mb-5">
+            <h2 class="head-line display-3">
+                Popular Categories
+            </h2>
+            <p class="lead mt-2 head-desc">Browse the most desirable categories</p>
+        </div>
+    </div>
+    <!-- Categories Carousel -->
+    <div class="fullwidth-carousel-container">
+        <div class="fullwidth-slick-carousel category-carousel">
+            <!-- Item -->
+            @{
+                foreach (var place in Model.Restaurants)
+                {
+                    <div class="fw-carousel-item">
+                        <div class="category-box-container text-center">
+                            <div class="category-box">
+                                <div class="category-box-content">
+                                    <h3>
+                                        <a asp-controller="Listing" asp-action="Detail" asp-route-Id="@place.Id" class="text-white">
+                                            @place.Name
+                                        </a>
+                                    </h3>
+                                    <span>
+                                        <small class="text-secondary badge badge-pill badge-success text-uppercase">
+                                            @{
+                                                var time1 = place.StartDate - place.StartDate.Date;
+                                                var time2 = place.EndDate - place.EndDate.Date;
+                                                var currentTime = DateTime.Now - DateTime.Now.Date;
+
+                                                if (currentTime > time1 && currentTime < time2)
+                                                {
+                                                    @("Open")
+                                                }
+                                                else
+                                                {
+                                                    @("Closed")
+                                                }
+
+                                            }
+                                        </small>
+                                    </span>
+                                </div>
+                                <div class="category-box-background" >
+                                    <img src="~/Uploads/@place.RestaurantImages.FirstOrDefault().Image" style="height: 100%;" alt="Alternate Text" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                foreach (var place in Model.Restaurants)
+                {
+                    <div class="fw-carousel-item">
+                        <div class="category-box-container text-center">
+                            <div class="category-box">
+                                <div class="category-box-content">
+                                    <h3>
+                                        <a asp-controller="Listing" asp-action="Detail" asp-route-Id="@place.Id" class="text-white">
+                                            @place.Name
+                                        </a>
+                                    </h3>
+                                    <span>
+                                        <small class="text-secondary badge badge-pill badge-success text-uppercase">
+                                            @{
+                                                var time1 = place.StartDate - place.StartDate.Date;
+                                                var time2 = place.EndDate - place.EndDate.Date;
+                                                var currentTime = DateTime.Now - DateTime.Now.Date;
+
+                                                if (currentTime > time1 && currentTime < time2)
+                                                {
+                                                    @("Open")
+                                                }
+                                                else
+                                                {
+                                                    @("Closed")
+                                                }
+
+                                            }
+                                        </small>
+                                    </span>
+                                </div>
+                                <div class="category-box-background" style="background-image: url('assets/images/cat-img-5.jpg')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                foreach (var place in Model.Restaurants)
+                {
+                    <div class="fw-carousel-item">
+                        <div class="category-box-container text-center">
+                            <div class="category-box">
+                                <div class="category-box-content">
+                                    <h3>
+                                        <a asp-controller="Restourant" asp-action="RestaurantDetail" asp-route-Id="@place.Id" class="text-white">
+                                            @place.Name
+                                        </a>
+                                    </h3>
+                                    <span>
+                                        <small class="text-secondary badge badge-pill badge-success text-uppercase">
+                                            @{
+                                                var time1 = place.StartDate - place.StartDate.Date;
+                                                var time2 = place.EndDate - place.EndDate.Date;
+                                                var currentTime = DateTime.Now - DateTime.Now.Date;
+
+                                                if (currentTime > time1 && currentTime < time2)
+                                                {
+                                                    @("Open")
+                                                }
+                                                else
+                                                {
+                                                    @("Closed")
+                                                }
+
+                                            }
+                                        </small>
+                                    </span>
+                                </div>
+                                <div class="category-box-background" style="background-image: url('assets/images/cat-img-6.jpg')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div class="block-space bg-secondary">
+    <div class="container">
+        <div class="block-head text-center mb-5">
+            <h2 class="head-line display-3">
+                Most Visited Places
+            </h2>
+            <p class="lead mt-2 head-desc">Discover top-rated local businesses</p>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="simple-slick-carousel dots-nav">
+
+                    @foreach (var item in Model.Restaurants)
+                    {
+                        <div class="carousel-item">
+                            <div class="category-box-container text-center">
+                                <div class="listing-item-container">
+                                    <div class="listing-item text-center">
+                                        <div class="mostviewed-bg">
+                                            <img src="~/Uploads/@item.RestaurantImages.FirstOrDefault().Image" alt="Alternate Text" />
+                                            <div class="listing-item-content">
+                                                <div class="list-logo">
+                                                    <a> <img src="~/assets/images/logo-1.png" width="80" height="80" alt="logo"></a>
+                                                </div>
+
+                                                <h3><a asp-controller="Listing" asp-action="Index">@item.Name</a></h3>
+                                                <p class="mb-0"> <small>@item.Address</small></p>
+                                                <span text-uppercase">
+                                                    @if ((item.StartDate.Hour < DateTime.Now.Hour && item.StartDate.Minute <= DateTime.Now.Minute) && (item.EndDate.Hour > DateTime.Now.Hour && item.EndDate.Minute <= DateTime.Now.Minute))
+                                                    {
+                                                        <span class="badge badge-pill list-banner badge-success">Open</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-pill list-banner badge-danger">Closed</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                            @{
+                                                int id = item.Id;
+                                            }
+                                            <a asp-controller="Home" asp-action="AddToCart" asp-route-id="@id" class="round-pill like-banner d-block bg-primary @(Model.AddToCart!=null?Model.AddToCart.Any(a => a==id.ToString())?"myadded":"":"")"><i class="fa fa-heart-o"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="block-space bg-primary">
+    <div class="container">
+        <div class="block-head text-center mb-5">
+            <h2 class="head-line text-white display-3">
+                Plan The Vacation of Your Dreams
+            </h2>
+            <div class="col-12 col-md-7 mx-auto pb-3">
+                <p class="lead mt-2 head-desc text-white">Explore some of the best tips from around the world from our partners and friends. Discover some of the most popular listings in Sydney.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-grid mt-5">
+            @foreach (var vacation in Model.Vacations)
+            {
+                <div class="col-lg-4 text-center">
+                    <div class="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
+                        <i class="@vacation.Icon"></i>
+                    </div>
+                    <h5 class="text-white mt-3">@vacation.Title</h5>
+                    <p class="text-white mt-3">@vacation.Text</p>
+                </div>
+            }
+
+         
+        </div>
+    </div>
+</div>
+<div class="block-space bg-secondary">
+    <div class="block-head text-center mb-5">
+        <h2 class="head-line display-3">
+            Recent Blog
+        </h2>
+        <p class="lead mt-2 head-desc">Hassel Free Service</p>
+    </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="row row-grid">
+                    @foreach (var item in Model.Blogs.OrderByDescending(b => b.CreatedDate).Take(3))
+                    {
+                        <div class="col-lg-4">
+                            <div class="card card-lift--hover shadow border-0">
+                                <img class="img-fluid" src="~/Uploads/@item.Image" alt="list-logo">
+                                <div class="card-body py-4">
+                                    <h5>@item.Title</h5>
+                                    <p>@item.CreatedDate.ToString("MMMM dd,yyyy")</p>
+                                    <p class="description mb-4">@(item.Content!=null && item.Content.Length>150? item.Content.Substring(0,140) + "..." : item.Content)</p>
+                                    <a class="btn btn-primary" asp-controller="BlogList" asp-action="Index">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

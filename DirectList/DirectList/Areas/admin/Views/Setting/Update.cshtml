@@ -1,0 +1,64 @@
+﻿@model Setting
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <form asp-area="admin" asp-controller="Setting" asp-action="Update" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="@Model.LogoFile" class="form-label">LogoFile</label>
+                    <input class="form-control" asp-for="@Model.LogoFile">
+                    <span asp-validation-for="@Model.LogoFile" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Addresss" class="form-label">Addresss</label>
+                    <input class="form-control" asp-for="@Model.Addresss">
+                    <span asp-validation-for="@Model.Addresss" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Phone" class="form-label">Phone</label>
+                    <input class="form-control" asp-for="@Model.Phone">
+                    <span asp-validation-for="@Model.Phone" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.Email" class="form-label">Email</label>
+                    <input class="form-control" asp-for="@Model.Email">
+                    <span asp-validation-for="@Model.Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Addresss2" class="form-label">Addresss2</label>
+                    <input class="form-control" asp-for="@Model.Addresss2">
+                    <span asp-validation-for="@Model.Addresss2" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Phone2" class="form-label">Phone2</label>
+                    <input class="form-control" asp-for="@Model.Phone2">
+                    <span asp-validation-for="@Model.Phone2" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="@Model.Email2" class="form-label">Email2</label>
+                    <input class="form-control" asp-for="@Model.Email2">
+                    <span asp-validation-for="@Model.Email2" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.About" class="form-label">About</label>
+                    <input class="form-control" asp-for="@Model.About">
+                    <span asp-validation-for="@Model.About" class="text-danger"></span>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a asp-area="admin" asp-controller="Setting" asp-action="Index">Back to list</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+

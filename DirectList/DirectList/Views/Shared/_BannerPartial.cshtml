@@ -1,0 +1,22 @@
+﻿@model Banner
+
+<div id="titlebar" class="gradient">
+    <div class="title-bar-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>@Model.Title</h2>
+                    <span>@Model.SubTitle</span>
+                    <!-- Breadcrumbs -->
+                    <nav id="breadcrumbs">
+                        <ul>
+                            <li><a>Home</a></li>
+                            <li>@Model.Page</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="title-overlay"></div>
+</div>

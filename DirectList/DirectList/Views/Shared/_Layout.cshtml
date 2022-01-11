@@ -1,0 +1,170 @@
+﻿@model VmLayout
+@inject IHttpContextAccessor _httpContextAccesssor
+
+@{
+    string oldData = _httpContextAccesssor.HttpContext.Request.Cookies["cart"];
+    int BasketCount = 0;
+
+    if (!string.IsNullOrEmpty(oldData))
+    {
+        BasketCount = oldData.Split("-").Length;
+    }
+}
+< !doctype html >
+<html lang="en">
+
+
+<!-- Mirrored from d-list.trendsetterthemes.org/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 23 Dec 2021 16:31:04 GMT -->
+<head>
+    <!-- Basic Page Needs
+         ================================================== -->
+    <meta charset="utf-8">
+    <title>D-List - Directory and Listing Html Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.html">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900" rel="stylesheet">
+    <!-- CSS
+         ================================================== -->
+    <link href="../maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/icon-font.css">
+    <link rel="stylesheet" href="~/assets/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+</head>
+
+<body>
+    <!-- Wrapper -->
+    <div id="wrapper">
+        <header class="header-global">
+            <nav id="navbar-main" class="navbar navbar-main fixed-top navbar-expand-lg navbar-transparent navbar-light headroom">
+                <div class="container">
+                    <div class="logo">
+                        <a><img src="~/Uploads/@Model.Setting.Logo" class="img-fluid" alt=""></a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse" id="navbar_global">
+                        <div class="navbar-collapse-header">
+                            <div class="row">
+                                <div class="col-6 collapse-brand">
+                                    <div class="logo">
+                                        <a><img class="img-fluid" src="assets/images/logo-white.png" width="164" height="25" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-6 collapse-close">
+                                    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+                                        <span></span>
+                                        <span></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="navbar-nav navbar-nav-hover align-items-lg-center ml-auto">
+                            <nav id="navigation" class="style-1">
+                                <ul id="responsive">
+                                    <li>
+                                        <a class="current" asp-controller="Home" asp-action="Index">Home</a>
+
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Listing" asp-action="Index">Listings</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="BlogList" asp-action="Index">Blog</a>
+
+                                    </li>
+                                    <li>
+                                        <a asp-controller="About" asp-action="Index">About</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Contact" asp-action="Index">Contact</a>
+                                    </li>
+                                    <a asp-controller="Home" asp-action="Cart">
+                                        <i class="fa fa-heart-o heart"></i>
+
+
+                                        @if (BasketCount != 0)
+                                        {
+                                            <span class="position-absolute  start-100 translate-middle badge badge-pill bg-danger">
+                                                <span>@BasketCount</span>
+                                            </span>
+                                        }
+
+                                    </a>
+
+
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        @RenderBody()
+
+        <div id="footer" class="sticky-footer bg-primary">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5 col-sm-6">
+                        <img class="footer-logo img-fluid" src="~/uploads/@Model.Setting.Logo" alt="list-logo">
+                        <br><br>
+                        <p class="text-white">@Model.Setting.About</p>
+                        <div class="text-widget text-white">
+                            <span class="text-white">@Model.Setting.Addresss</span> <br> Phone: <span class="text-white">@Model.Setting.Phone </span><br> E-Mail:
+                            <span class="text-white"> <a href="#" class="text-white">@Model.Setting.Email</a> </span><br>
+                        </div>
+                        <div class="mt-4">
+                            @foreach (var social in Model.Socials)
+                            {
+                                <a target="_blank" href="https://twitter.com/" class="btn btn-neutral btn-icon-only btn-round btn-lg " data-toggle="tooltip" data-original-title="Follow us">
+                                    <i class="@social.Icon" style="text-align:center"></i>
+                                </a>
+                            }
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3  col-sm-12">
+                        <ul class="footer-links">
+                            <li><a class="text-white" asp-controller="About" asp-action="Index">About</a></li>
+                            <li><a class="text-white" asp-controller="BlogList" asp-action="Index">Blog</a></li>
+                            <li><a class="text-white" asp-controller="Contact" asp-action="Index">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Copyright -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyrights text-white">© 2019 D-List. All Rights Reserved.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Wrapper / End -->
+    <!-- Scripts
+         ================================================== -->
+    <script type="text/javascript" src="~/assets/scripts/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/popper.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/mmenu.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/chosen.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/slick.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/rangeslider.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/magnific-popup.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/waypoints.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/counterup.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/tooltips.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/jquery.countdown.min.js"></script>
+    <script type="text/javascript" src="~/assets/scripts/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/30.0.0/classic/ckeditor.js"></script>
+    <script src="https://kit.fontawesome.com/6ff3f42b45.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="~/assets/scripts/custom.js"></script>
+</body>
+
+</html>
